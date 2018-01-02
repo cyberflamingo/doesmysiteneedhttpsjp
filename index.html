@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 	<head>
 		<title>私のサイトをHTTPS化する必要がありますか？</title>
 		<meta charset="utf-8">
@@ -23,18 +23,17 @@
 		<meta itemprop="description" content="あなたのサイトをHTTPS化する必要があるかどうかを調べましょう。">
 		<meta property="og:translator" content="@ale_mercier">
 
-		<script src="script.js"></script>
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans:400,600">
-		<!-- <link rel="stylesheet" href="font.css"> -->
-		<link rel="stylesheet" href="style.css">
+		<!-- <script src="script.js"></script> -->
+		<link rel="stylesheet" href="font.css">
+		<link rel="stylesheet" href="style.min.css">
 	</head>
 	<body>
 		<div class="header"><a href="https://doesmysiteneedhttps.com/">英語</a></div>
 		<h1>
 			はい
-			<div class="subtitle">
+			<span class="subtitle">
 				あなたのサイトをHTTPS化する必要があります。
-			</div>
+			</span>
 		</h1>
 
 		<h2>「でも私のサイトには問い合わせフォームのようなユーザーの個人情報を集めるものはないんだけど」</h2>
@@ -67,58 +66,33 @@
 			攻撃しようとしますが、あなたの秘密鍵が漏れない限り、一致しない、あるいは無効なTSL証明書が提示されると、ブラウザーは警告を表示します。そして、攻撃者がHTTPSを全く使用していない場合、ブラウザーは偽装ページに「保護されていません」と表示するべきです。そのために、HTTPSは<b>真正性</b>を保証します。
 		</p>
 
-		<h2>"Domain-validated (DV) certificates aren't secure."</h2>
 		<h2>「ドメイン認証型SSLサーバ証明書（下記DV証明書）は安全ではない。」</h2>
-		<p>
-			Yes they are. Just don't lose control over your DNS and choose a <a href="https://letsencrypt.org">competent certificate authority</a> (as opposed to <a href="https://www.godaddy.com/garage/godaddy/information-about-ssl-bug/">less competent</a> or <a href="https://groups.google.com/a/chromium.org/d/msg/blink-dev/eUAKwjihhBs/rpxMXjZHCQAJ">troublesome</a> <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1311713">ones</a>).
-			There is absolutely no difference in the cryptography in a DV certificate compared to that of an extended validation (EV) certificate.
-		</p>
 		<p>
 			安全です。DNSの管理を漏らさない、且つ、<a href="https://letsencrypt.org">有能な認証局</a>を選べば大丈夫です。（<a href="https://www.godaddy.com/garage/godaddy/information-about-ssl-bug/">有能でない認証局</a>の例と<a href="https://groups.google.com/a/chromium.org/d/msg/blink-dev/eUAKwjihhBs/rpxMXjZHCQAJ">面倒な認証局</a>、<a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1311713">例2</a>）。
 			DV証明書の暗号化はExtended Validation（EV）SSL証明書の暗号化に比べて、違いが一切ありません。
 		</p>
 
-		<h2>"But CAs can misissue for my site any day &lt;...or any other complaint about the CA system&gt;."</h2>
 		<h2>「でも認証局はいつでも私のサイトに不正な証明書を発行することができる　&lt;・・・その他、認証局の仕組みについての文句&gt;」</h2>
 		<p>
-			Look, this discussion isn't about PKI. It's the best system we've got for right now. Deal with it and secure your site. Use <a href="https://tools.ietf.org/html/rfc6844">CAA records</a> to restrict which CAs can issue certificates for your site, then cross your fingers and hope transparency and oversight works (it does, so far).
-		</p>
-		<p>
-			この会話は公開鍵基盤についてではありません。現状は一番いい仕組みである。我慢してあなたのサイトをセキュアにしてください。<a href="https://tools.ietf.org/html/rfc6844">CAAレコート</a>を利用してあなたのサイトに証明書を発行できる認証局を指定して、そして、トランスペアレンシーと監督がうまく行くよう祈りましょう（今までうまく行っています）。
+			公開鍵基盤について話しているのではありません。現状では一番いい仕組みです。我慢してあなたのサイトをセキュアにしてください。<a href="https://tools.ietf.org/html/rfc6844">CAAレコート</a>を利用してあなたのサイトに証明書を発行できる認証局を指定して、そして、透明性の確保と監督がうまく行くよう祈りましょう（今までうまく行っています）。
 		</p>
 
-		<h2>"HTTPS doesn't hide the size of the content, leaking clues to attackers."</h2>
 		<h2>「HTTPSはコンテンツのサイズを隠さないため、攻撃者に手がかりを漏らしてします」</h2>
-		<p>
-			TLS 1.3 and HTTP/2 have <a href="https://tlswg.github.io/tls13-spec/#rfc.section.5.4">padding frames</a> to inflate the size of the ciphertext.
-		</p>
 		<p>
 			TLS 1.3とHTTP/2は<a href="https://tlswg.github.io/tls13-spec/#rfc.section.5.4">パッディングフレーム</a>という技術があり、暗号文のサイズを膨張させます。
 		</p>
 
-		<h2>"HTTPS doesn't hide the DNS lookup."</h2>
 		<h2>「HTTPSはDNS正引きを隠さない」</h2>
-		<p>
-			Of course not. DNS != HTTP. But is that really a valid reason not to encrypt the connection between your website and its visitors?? (Hint: no.)
-		</p>
 		<p>
 			もちろん。DNS != HTTP。でもこれはあなたのウェブサイトとユーザーの間の接続を暗号化しない理由となりますか？？（ヒント：いいえ）
 		</p>
 
-		<h2>"HTTPS is slow."</h2>
 		<h2>「HTTPSは遅い」</h2>
 		<p>
-			<a href="https://istlsfastyet.com/">No it's not.</a> Sites with modern servers load faster over HTTPS than over HTTP because of HTTP/2.
-		</p>
-		<p>
-			<a href="https://istlsfastyet.com/">いいえ、遅くなりません。</a> モダンなサーバーのあるサイトはHTTP/2のおかげで、HTTPよりHTTPSの方は表示速度が早いです。
+			<a href="https://istlsfastyet.com/">いいえ、遅くなりません。</a> モダンなサーバー 上で動くサイトはHTTP/2のおかげで、HTTPよりHTTPSの方は表示速度が早いです。
 		</p>
 
-		<h2>"Phishing sites use HTTPS."</h2>
 		<h2>「フィッシングサイトはHTTPSを使う」</h2>
-		<p>
-			... so you won't?
-		</p>
 		<p>
 			... というわけであなたは使いません？
 		</p>
